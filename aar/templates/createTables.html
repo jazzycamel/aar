@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Tables</h1>
+
+<ul>
+{% for table,positions in tables.items %}
+  <li>
+    {{table}}
+    <ol>
+        {% for position,name in positions.items %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ol>
+  </li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

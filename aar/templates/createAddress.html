@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block extraScript %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function postCodeAnywhere(postCode){
+        url="http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/Find/v1.10/json3.ws?callback=?";
+        data={
+            Key:               "FP45-DW93-UT17-FW16",
+            SearchTerm:        postCode,
+            PreferredLanguage: "English",
+            Filter:            "OnlyResidential",
+            UserName:          ""
+        }
+        $.get(url, data, pcaFindCallback,"json");
+    }
+
+    function pcaFindCallback(data){
+        if (data.Items.length == 1 && typeof(data.Items[0].Error) != "undefined") {
+            alert(data.Items[0].Description);
+        }
+        else {
+            if (data.Items.length == 0)
+                alert("Sorry, there were no results");
+            else {
+                aSelect=$('#addressSelect');
+                $.each(data.Items, function(index, value){
+                    option=$("<option></option>");
+                    option.attr('value', value.Id);
+                    option.text(value.StreetAddress+" "+value.Place);
+                    aSelect.append(option)
+                });
+                aSelect.change(pcaRetrieve);
+            }
+        }        
+    }
+
+    function pcaRetrieve(){
+        id=$("#addressSelect").val();
+        url="http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/RetrieveById/v1.30/json3.ws?callback=?";
+        data={
+            Key:               "FP45-DW93-UT17-FW16",
+            Id:                id,
+            PreferredLanguage: "English",
+            UserName:          ""
+        }
+        $.get(url, data, pcaRetrieveCallback,"json");
+    }
+
+    function pcaRetrieveCallback(data){
+        if (data.Items.length == 1 && typeof(data.Items[0].Error) != "undefined") {
+            alert(data.Items[0].Description);
+        }
+        else {
+            if (data.Items.length == 0)
+                alert("Sorry, there were no results");
+            else {
+                i=data.Items[0]
+                for(x=1; x<=5; x++) $('#id_address'+x).val(i['Line'+x]);
+                $('#id_townCity').val(i.PostTown);
+                $('#id_county').val(i.County);
+                $('#id_postCode').val(i.Postcode);
+                if(i.CountryISO2=='GB') $('#id_country').val('United Kingdom');
+            }
+        }
+    }
+
+</script>
+{% endblock extraScript %}
+
+{% block content %}
+<h1>Address</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address 1</th>
+      <th>Address 2</th>
+      <th>Address 3</th>
+      <th>Address 4</th>
+      <th>Address 5</th>
+      <th>Town/City</th>
+      <th>County</th>
+      <th>Post Code</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for address in addresses %}
+    <tr>
+      <td>{{address.address1}}</td>
+      <td>{{address.address2}}</td>
+      <td>{{address.address3}}</td>
+      <td>{{address.address4}}</td>
+      <td>{{address.address5}}</td>
+      <td>{{address.townCity}}</td>
+      <td>{{address.county}}</td>
+      <td>{{address.postCode}}</td>
+      <td>{{address.country}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<button onClick="javascript:postCodeAnywhere('WR2 6NJ');">PAF</button>
+
+<select id="addressSelect">
+    <option>-----</option>
+</select>
+<form method="post" action="{% url 'aar.views.createAddress' %}">
+  {% csrf_token %}
+  {{ aForm.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+<p>
+  <a href="{% url 'aar.views.createPerson' %}">Person</a>&nbsp;|
+  <a href="{% url 'aar.views.createAddress' %}">Address</a>&nbsp;|
+  <a href="{% url 'aar.views.createInvitation' %}">Invitation</a>
+</p>
+{% endblock content %}

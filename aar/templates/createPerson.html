@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Person</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Wedding Party</th>
+      <th>Child (under 3)</th>
+      <th>Day Invite?</th>
+      <th>RSVP?</th>
+      <th>Attending Day?</th>
+      <th>Position</th>
+      <th>Attending Night?</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Invitation</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for person in people %}
+    <tr>
+      <td>{{forloop.counter}}.</td>
+      <td>{{person.title}}</td>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.weddingParty}}</td>
+      <td>{{person.child}}</td>
+      <td>{{person.invitation.day}}</td>
+      <td>{{person.invitation.rsvp}}</td>
+      <td>{{person.attendingDay}}</td>
+      <td>{{person.tablePosition}}</td>
+      <td>{{person.attendingNight}}</td>
+      <td><a href="mailto:{{person.email}}">{{person.email}}</a></td>
+      <td>{{person.phone}}</td>
+      <td>{{person.address}}</td>
+      <td>{{person.invitation}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Ivitation Count</th>
+      <th>Attending Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RSVP</td>
+      <td>{{invitation_count}}</td>
+      <td>{{rsvp_count}}</td>
+    </tr>
+    <tr>
+      <td>Day</td>
+      <td>{{day_count}}</td>
+      <td>{{day_attending_count}}</td>
+    </tr>
+    <tr>
+      <td>Night</td>
+      <td>{{night_count}}</td>
+      <td>{{night_attending_count}}</td>
+    </tr>
+    <tr>
+      <td>Wedding Party</td>
+      <td>{{weddingParty_count}}</td>
+      <td>-</td>
+    </tr>
+    <tr>      
+      <td>Children</td>
+      <td>{{child_count}}</td>
+      <td>-</td>      
+    </tr>     
+  </tbody>
+</table>
+
+<form method="post" action="{% url 'aar.views.createPerson' %}">
+  {% csrf_token %}
+  {{ pForm.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+
+<p>
+  <a href="{% url 'aar.views.createPerson' %}">Person</a>&nbsp;|
+  <a href="{% url 'aar.views.createAddress' %}">Address</a>&nbsp;|
+  <a href="{% url 'aar.views.createInvitation' %}">Invitation</a>
+</p>
+{% endblock content %}

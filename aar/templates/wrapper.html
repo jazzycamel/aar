@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block extraStyle %}
+<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+{% endblock extraStyle %}
+{% block extraScript %}
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock extraScript %}
+{% block body %}
+<div id="wrapper">
+  <header>
+    <a href="{% url 'aar.views.index' %}">
+      <img src="/static/img/deco-plaque.png" id="plaque" />
+    </a>
+  </header>
+  <nav>
+    <hr />
+    <ul>
+      {% url 'aar.views.home' as homeUrl %}
+      <li><a href="{{ homeUrl }}" id="home" {% if request.path == homeUrl %}class="active"{% endif %}></a></li>
+      {% url 'aar.views.venue' as venueUrl %}
+      <li><a href="{{ venueUrl }}" id="venue" {% if request.path == venueUrl %}class="active"{% endif %}></a></li>
+      {% url 'aar.views.travel' as travelUrl %}
+      <li><a href="{{ travelUrl }}" id="travel" {% if request.path == travelUrl %}class="active"{% endif %}></a></li>
+      {% url 'aar.views.accommodation' as accommodationUrl %}
+      <li><a href="{{ accommodationUrl }}" id="accommodation" {% if request.path == accommodationUrl %}class="active"{% endif %}></a></li>
+      {% url 'aar.views.contact' as contactUrl %}
+      <li><a href="{{ contactUrl }}" id="contact" {% if request.path == contactUrl %}class="active"{% endif %}></a></li>
+    </ul>
+    <hr />
+  </nav>
+  <div id="content">
+  {% block content %}
+  {% endblock content %}
+  </div>
+  <div id="push"></div>
+</div>
+<footer>
+  <hr />
+  <br />
+  &copy;{{ touchDate|date:"Y" }} <a href="http://www.goldiefishbowl.com/">GoldieFishBowl</a> &amp; <a href="http://www.gulon.co.uk/">GulonSoft</a>
+  <br />
+  Last Updated: {{ touchDate|date:"H:i l jS F Y" }}
+
+</footer>    
+{% endblock body %}

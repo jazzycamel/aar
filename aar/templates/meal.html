@@ -1,0 +1,30 @@
+{% extends "wrapper.html" %}
+{% block title %} - Home{% endblock title %}
+{% block content %}
+<h1>Wedding Breakfast Menu</h1>
+<p style="padding: 20px 0 0 0;">
+    Please select a Starter, Main Course and Dessert for each attending guest
+    from the options below.
+</p>
+<form name="mealform" method="post" action="/meal/">
+    {% csrf_token %}
+    <table class='meal rsvpTable'>
+    {% for form in forms %}
+    <tr class="rsvpSubmit">
+        <td colspan="2">
+            <h3>
+            {{ form.instance.person.firstName }}
+            {{ form.instance.person.lastName }}:
+            </h3>
+        </td>
+    </tr>  
+    {{form.as_table}}  
+    {% endfor %}
+    <tr class="rsvpSubmit">
+        <td colspan="2" id="buttonCell">
+            <input type="submit" name="submit" value="Continue" />
+        </td>
+    </tr>
+    </table>   
+</form>
+{% endblock content %}

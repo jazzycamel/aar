@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block extraStyle %}
+<link rel="stylesheet" type="text/css" href="static/css/index.css" />
+{% endblock extraStyle %}
+{% block content %}
+<div id="centered">
+  <img src="static/img/deco-plaque.png" id="plaque" />
+  <div class="middot">&middot;</div>
+  <a href="{% url 'aar.views.home' %}" id="enter-site"></a>
+  <div class="middot">&middot;</div>
+</div>
+<div id="footer">
+  &copy;2014 <a href="http://www.goldiefishbowl.com/">GoldieFishBowl</a> &amp; <a href="http://www.gulon.co.uk/">GulonSoft</a>
+</div>
+{% endblock content %}

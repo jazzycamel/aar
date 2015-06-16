@@ -1,0 +1,52 @@
+{% extends "wrapper.html" %}
+{% block title %} - Home{% endblock title %}
+{% block content %}
+<h1>RSVP</h1>
+<p style="padding: 20px 0 0 0;">
+  Please indicate below which Guests shall be attending which parts of the day by checking the appropriate box.
+</p>
+<form name="rsvpform" method="post" action="/rsvp/">
+  {% csrf_token %}
+  {{form.management_form}}
+  <fieldset>
+    <table class="rsvpTable">
+      <thead>
+        <th>Guests Name</th>
+        {% if invite.day %}
+        <th>Wedding Ceremony &amp; Breakfast</th>
+        {% endif %}
+        <th>Evening Reception</th>
+      </thead>
+      <tbody>
+        {% for field in form %}
+        <tr>
+          {% for f in field %}
+            {{f.errors}}
+            {% if f.label == "First Name" %}
+            <td>
+              <input type="hidden" id="{{f.id_for_label}}" value="{{f.value}}" name="{{f.html_name}}">
+              {{ f.value }}
+            {% elif f.label == "Last Name" %}
+              {{ f.value }}:
+               <input type="hidden" id="{{f.id_for_label}}" value="{{f.value}}" name="{{f.html_name}}">
+            </td>
+            {% elif f.is_hidden %}
+            {{f}}
+            {% else %}
+            <td>{{f}}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+        <tr class="rsvpSubmit">
+            <td></td>
+            {% if invite.day %}<td></td>{% endif %}
+            <td id="buttonCell">
+              <input type="submit" name="submit" value="Continue" />
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+</form>
+{% endblock content %}

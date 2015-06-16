@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block extraScript %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function csrfSafeMethod(method) {
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+
+  function getPeopleForAddress(){
+    pk=$(this).val();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'aar.views.getPeopleForAddress' %}",
+      data: { pk:pk }
+    }).done(function(data){
+      people=data['people'];
+      fieldset=$('#peopleFieldset');
+      for(i=0; i<people.length; i++){
+        person=people[i];
+        input=$('<input />');
+        input.attr('type',"checkbox");
+        input.attr('name',"people");
+        input.val(person.id);
+
+        fieldset.append(input);
+        fieldset.append(person.name+"<br />");
+      }
+    })
+  }
+
+  $(function(){
+    var csrftoken = getCookie('csrftoken');
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      }
+    });
+
+    $('#id_address').change(getPeopleForAddress);
+  });
+</script>
+{% endblock extraScript %}
+
+{% block content %}
+<h1>Invitation</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Day</th>
+      <th>Night</th>
+      <th>Address</th>
+      <th>People</th>
+      <th>Label</th>
+      <th>RSVP</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for invitation in invitations %}
+    <tr>
+      <td>{{forloop.counter}}.</td>
+      <td>{{invitation.day}}</td>
+      <td>{{invitation.night}}</td>
+      <td>{{invitation.address}}</td>
+      <td>
+        {% for person in invitation.person.all %}
+        {{person}}{% if not forloop.last %},&nbsp;{% endif %}
+        {% endfor %}
+      </td>
+      <td>{{invitation.label}}</td>      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<form method="post" action="{% url 'aar.views.createInvitation' %}">
+  {% csrf_token %}
+  {{ iForm.as_p }}
+  <fieldset id="peopleFieldset">
+    <legend>People</legend>
+  </fieldset>
+  <input type="submit" value="Submit" />
+</form>
+<p>
+  <a href="{% url 'aar.views.createPerson' %}">Person</a>&nbsp;|
+  <a href="{% url 'aar.views.createAddress' %}">Address</a>&nbsp;|
+  <a href="{% url 'aar.views.createInvitation' %}">Invitation</a>
+</p>
+{% endblock content %}

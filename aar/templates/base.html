@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Andrina and Rob{% block title %}{% endblock title %}</title>
+
+    {% block extraStyle %}{% endblock extraStyle %}
+    {% block extraScript %}{% endblock extraScript %}
+
+  </head>
+  <body>
+  {% block body %}
+    {% block content %}
+    {% endblock content %}
+  {% endblock body %}
+  </body>
+</html>

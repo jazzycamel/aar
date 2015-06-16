@@ -1,0 +1,64 @@
+body {
+  font-family: Helvetica;
+  font-size: 12px;
+  color: black;
+}
+
+a, a:link, a:active, a:visited {
+  /*text-decoration: none;*/
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #acdde9;
+}
+
+div#centered {
+  width: 720px;
+  height: 379px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -152px 0 0 -360px;
+  text-align: center;
+}
+
+img#plaque {
+  width: 720px;
+  height: 304px;
+}
+
+div.middot {
+  font-size: 60px;
+  display: inline-block;
+  height: 75px;
+  vertical-align: top;
+  margin: 0;
+  padding: 0;
+  line-height: 75px;
+}
+
+a#enter-site {
+  display: inline-block;
+  width: 200px;
+  height: 75px;
+  background-image: url(../img/enter-site.png);
+  background-size: 200px 75px;
+  margin: 0;
+  padding: 0;
+}
+
+a#enter-site:hover {
+  background-image: url(../img/enter-site-blue.png);
+}
+
+div#footer {
+  width: 250px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin: 0 0 0 -125px;
+  text-align: center;
+  font-size: 1em;
+}

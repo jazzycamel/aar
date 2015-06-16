@@ -1,0 +1,24 @@
+{% extends "wrapper.html" %}
+{% block title %} - Contact{% endblock title %}
+{% block content %}
+{% if form %}
+<form name="contactform" method="post" action="{% url 'aar.views.contact' %}">
+  {% csrf_token %}
+  <fieldset>
+    <!-- <legend>Contact Form</legend> -->
+    <table>
+    {{ form.as_table }}
+      <tr>
+        <th></th>
+        <td id="buttonCell">
+          <input type="reset" name="reset" value="Reset" />
+          <input type="submit" name="submit" value="Send Message" />
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</form>
+{% else %}
+Thank you for your message.
+{% endif %}
+{% endblock content %}

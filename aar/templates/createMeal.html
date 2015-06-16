@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Meal</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Starter</th>
+      <th>Main</th>
+      <th>Dessert</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for person in people %}
+    <tr>
+      <td>{{person.firstName}} {{person.lastName}}</td>
+      <td>{{person.meal.starter}}</td>
+      <td>{{person.meal.main}}</td>
+      <td>{{person.meal.dessert}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<form>
+  {% csrf_token %}
+  {{ mForm.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock content %}

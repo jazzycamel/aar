@@ -1,0 +1,30 @@
+{% extends "wrapper.html" %}
+{% block content %}
+<form method="POST" action="{%url 'login'%}">
+  <fieldset>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{next}}" />
+    <legend>Login Form</legend>
+    <p>
+      Please log in with the details provided on your invitation using the form below.
+    </p>
+    <table>
+      <tr>
+        <th><label for="inviteId">Invitation ID:</label></th>
+        <td><input type="text" name="inviteId" id="inviteId" value="{{invitationNum}}" /></td>
+      </tr>
+      <tr>
+        <th><label for="password">Password:</label></th>
+        <td><input type="text" name="password" id="password" /></td>
+      </tr>    
+      <tr>
+        <th></th>
+        <td id="buttonCell">
+          <input type="submit" value="Login" />
+        </td>
+      </tr>
+
+    </table>
+  </fieldset>
+</form>
+{% endblock content %}

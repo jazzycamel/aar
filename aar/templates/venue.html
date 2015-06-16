@@ -1,0 +1,40 @@
+{% extends "wrapper.html" %}
+{% block title %} - Venue{% endblock title %}
+{% block content %}
+<p>
+    Our wedding ceremony will take place at:
+</p>
+<p>
+    <address>
+        Chatelherault<br />
+        Chatelherault Country Park<br />
+        Ferniegair<br />
+        Hamilton<br />
+        ML3 7UE<br />
+        Website: <a href="http://www.slleisureandculture.co.uk/info/114/chatelherault_country_park">
+            slleisureandculture.co.uk</a><br />
+        Website: <a href="http://www.southlanarkshire.gov.uk/info/200166/getting_outdoors/677/chatelherault_country_park">
+            southlanarkshire.gov.uk</a><br />
+        Email: <a href="mailto:chatelheraultcountrypark@southlanarkshireleisure.co.uk">
+            chatelheraultcountrypark@southlanarkshireleisure.co.uk</a><br />
+        Phone: 01698 426213<br />
+    </address>
+</p>
+<p>
+    Our wedding breakfast and reception will take place at:
+</p>
+<p>
+    <address>
+        The Popinjay Hotel<br />
+        15 Rosebank Road<br />
+        Rosebank<br />
+        North Lanarkshire<br />
+        ML8 5QB<br />
+        Website: <a href="http://www.popinjayhotel.com/">popinjayhotel.com</a><br />
+        Phone: 01555 860441
+    </address>
+</p>
+<p>
+    Please consult the <a href="{% url 'aar.views.travel' %}">Travel</a> page for maps and travel options.
+</p>
+{% endblock content %}

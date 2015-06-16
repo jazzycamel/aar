@@ -1,0 +1,239 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+  font-family: Helvetica;
+  font-size: 12px;
+  color: black;
+}
+
+h1 {
+    font-weight: normal;
+    text-align: center;
+    text-decoration: underline;
+}
+
+p {
+    margin-bottom: 25px;
+}
+
+hr {
+    margin: 0 auto;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));     
+}
+
+a, a:link, a:active, a:visited {
+  color: black;
+}
+
+a:hover {
+  color: #acdde9;
+  text-decoration: none;
+}
+
+fieldset {
+    padding: 25px;
+    border: none;
+}
+
+legend {
+    font-size: 1.5em;
+    text-decoration: underline;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    margin: 3px 0;
+}
+
+input[type=text], textarea {
+    margin: 3px 0;
+    min-width: 300px !important;
+}
+
+input[type=submit], input[type=button], input[type=reset] {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, input[type=button]:hover, input[type=reset]:hover {
+    color: white;
+    background: #acdde9;
+}
+
+table th {
+    text-align: right;
+    vertical-align: top;
+    font-weight: normal;
+}
+
+table td#buttonCell {
+    text-align: right;
+}
+
+/* STRUCTURE */
+
+div#wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    width: 800px;
+    margin: 0 auto -50px;
+}
+
+div#push {
+    height: 50px;
+}
+
+/* HEADER */
+
+header {
+    padding: 25px 0;
+}
+
+img#plaque {
+    display: block;
+    width: 480px;
+    margin: 0 auto;
+}
+
+/* NAV */
+
+nav {
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+}
+
+nav ul li a {
+    display: inline-block;
+    width: 150px;
+    height: 50px;    
+    background-size: 150px 50px;
+}
+
+a#home {
+    background-image: url(../img/home.png);
+}
+
+a#venue {
+    background-image: url(../img/venue.png);
+}
+
+a#travel {
+    background-image: url(../img/travel.png);
+}
+
+a#accommodation {
+    background-image: url(../img/accommodation.png);
+}
+
+#contact {
+    background-image: url(../img/contact.png);
+}
+
+a#home:hover, a.active#home {
+    background-image: url(../img/home-blue.png);
+}
+
+a#venue:hover, a.active#venue {
+    background-image: url(../img/venue-blue.png);
+}
+
+a#travel:hover, a.active#travel {
+    background-image: url(../img/travel-blue.png);
+}
+
+a#accommodation:hover, a.active#accommodation {
+    background-image: url(../img/accommodation-blue.png);
+}
+
+a#contact:hover, a.active#contact {
+    background-image: url(../img/contact-blue.png);
+}
+
+/* CONTENT */
+
+div#content {
+    padding: 25px;
+}
+
+img.polaroid {
+    width: 400px;
+/*    margin: 20px auto;*/
+    display: block;
+    border: 5px solid white;
+}
+
+figure.polaroidWrap {
+    width: 410px;
+    margin: 20px auto;
+    display: block;
+    border: 5px solid black;   
+}
+
+figcaption {
+    text-align: center;
+    padding: 5px;
+}
+
+table.meal td label {
+    width: 500px;
+}
+
+table.meal ul {
+    list-style-type: none;
+}
+
+table.rsvpTable {
+    border-collapse: collapse;
+}
+
+table.rsvpTable th {
+    border: 1px solid black;
+    padding: 10px;
+    font-weight: bold;
+}
+
+table.rsvpTable td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+tr.rsvpSubmit td {
+    border: none;
+}
+
+/* FOOTER */
+
+footer {
+    display: block;
+    width: 800px;
+    height: 50px;
+    margin: 0 auto;
+    /*margin: 25px 0;*/
+    text-align: center;    
+}
